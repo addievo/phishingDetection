@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html>
+    <body>
+        <h2>Phishing Website Detection</h2>
+        <form action="{{ url_for('predict')}}" method="post">
+            <label for="url">Enter the URL:</label><br>
+            <input type="text" id="url" name="url"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
 </html>
