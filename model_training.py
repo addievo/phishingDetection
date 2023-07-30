@@ -26,13 +26,14 @@ def split_data(x, y):
 
 
 # Creating and saving model
+# Increasing number of layers, from 3 to 6, with 100 neurons each.
 def main():
     x, y = load_data()
     x_train, x_test, y_train, y_test = split_data(x, y)
 
     # Fit model to training data
 
-    model = MLPClassifier(alpha=0.001, hidden_layer_sizes=([100, 100, 100]))
+    model = MLPClassifier(alpha=0.001, hidden_layer_sizes=([100, 100, 100, 100, 100, 100]))
     model.fit(x_train, y_train)
 
     # predicting the target value from model for samples
