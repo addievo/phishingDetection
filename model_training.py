@@ -1,19 +1,13 @@
 import pandas as pd
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from keras.models import Sequential
-from keras.layers import Dense
+from sklearn.neural_network import MLPClassifier
+import joblib
 
 
 def load_data():
-    phishing_data = pd.read_csv("data/4.phishing.csv")
-    legitimate_date = pd.read_csv("data/3.legitimate.csv")
-
-    # Combine phishing and legitimate data
-    combined_data = pd.concat([phishing_data, legitimate_date])
-
-
-    print(phishing_data['Label'].value_counts())
+    combined_data = pd.read_csv("data/5.urldata.csv")
 
     # Split features and target y
 
@@ -31,50 +25,35 @@ def split_data(x, y):
     return x_train, x_test, y_train, y_test
 
 
-def normalize_data(x_train, x_test):
-    # Normalize data
-
-    scaler = StandardScaler()
-    x_train_scaled = scaler.fit_transform(x_train)
-    x_test_scaled = scaler.transform(x_test)
-
-    return x_train_scaled, x_test_scaled
-
-# Learning rate too high, reducing.
-def create_model(input_dim):
-    # Create model
-    model = Sequential()
-    model.add(Dense(32, input_dim=input_dim, activation='relu'))
-    # Simple model with 32 layers of neurons.
-    # Activation function is the Rectified Linear Unit (ReLU)
-    # The output layer has one neuron with a sigmoid function to output a value between 0 and 1
-
-
-    #compile model
-    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
-    # Loss function is binary cross entropy
-    # Optimizer is Adam
-    # Metrics is accuracy
-
-    return model
-
+# Creating and saving model
 def main():
     x, y = load_data()
     x_train, x_test, y_train, y_test = split_data(x, y)
-    x_train_scaled, x_test_scaled = normalize_data(x_train, x_test)
 
-    model = create_model(x_train_scaled.shape[1])
+    # Fit model to training data
 
-    #Fit model to training data
+    model = MLPClassifier(alpha=0.001, hidden_layer_sizes=([100, 100, 100]))
+    model.fit(x_train, y_train)
 
-    model.fit(x_train_scaled, y_train, epochs=10, batch_size=32, validation_data=(x_test_scaled, y_test))
-    # Epochs is the number of times the model will cycle through the data
-    # Batch size is the number of samples per gradient update
-    # Validation data is the data on which to evaluate the loss and any model metrics at the end of each epoch
+    # predicting the target value from model for samples
 
-    #Save model
+    y_test_model = model.predict(x_test)
+    y_train_model = model.predict(x_train)
 
-    model.save('models/phishing_detection_model.h5')
+    # compute accuracy of model
+
+    accuracy_test = accuracy_score(y_test, y_test_model)
+    accuracy_train = accuracy_score(y_train, y_train_model)
+
+    # print accuracy of model
+
+    print("Multilayer Perceptrons: Accuracy on training Data: {:.3f}".format(accuracy_test))
+    print("Multilayer Perceptrons: Accuracy on test Data: {:.3f}".format(accuracy_train))
+
+    # Save model
+
+    joblib.dump(model, 'models/phishing_detection_model.pkl')
+
 
 if __name__ == "__main__":
     main()
