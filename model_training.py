@@ -40,7 +40,7 @@ def normalize_data(x_train, x_test):
 
     return x_train_scaled, x_test_scaled
 
-
+# Learning rate too high, reducing.
 def create_model(input_dim):
     # Create model
     model = Sequential()
@@ -51,7 +51,7 @@ def create_model(input_dim):
 
 
     #compile model
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
     # Loss function is binary cross entropy
     # Optimizer is Adam
     # Metrics is accuracy
