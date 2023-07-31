@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <body>
-        <h2>Phishing Website Detection</h2>
-        <form action="{{ url_for('predict')}}" method="post">
-            <label for="url">Enter the URL:</label><br>
-            <input type="text" id="url" name="url"><br>
-            <input type="submit" value="Submit">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/css/index-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <div id="particles-js"></div>
+       <a href="https://Adityav.au" target="_blank">
+        <img class="logo" src="https://adityav.au/dist/img/logo.png" alt="Adityav Logo" style="width: 20%; height: auto">
+    </a>
+    <div class="centered-content">
+        <h1 class="h1">Welcome to <span class="main-font text-blue">Phishing Detection System</span></h1>
+        <p class="student">Enter the URL you want to check.</p>
+        <form action="{{ url_for('predict') }}" method="post">
+            <input type="text" name="url" placeholder="Enter URL" required>
+            <button type="submit" class="btn-blue">Check URL</button>
         </form>
-    </body>
+    </div>
+    <script>
+        particlesJS.load('particles-js', '/static/particles.json', function() {
+            console.log('particles.json loaded...');
+        });
+    </script>
+</body>
 </html>

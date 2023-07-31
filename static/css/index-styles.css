@@ -1,0 +1,108 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Courier Prime', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000; /* fallback color if particles.js fails to load */
+    user-select: none; /* Prevents text from being selected */
+}
+
+.logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11110;
+}
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.centered-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.centered-content {
+    position: relative;
+    z-index: 3;
+}
+
+.h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.text-blue {
+    color: #007BFF;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+input[type=text] {
+    padding: 1em;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 3px;
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-blue {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    transition: all 0.3s;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background-color: #3b82f6;
+    border: 2px solid #3b82f6;
+    margin-top: 1em;
+}
+
+.btn-blue, .btn-blue-outline {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from buttons */
+}
+
+.btn-blue {
+    color: white;
+    background-color: #3b82f6;
+    border: 2px solid #3b82f6;
+}
+
+.btn-blue-outline {
+    color: #3b82f6; /* Change text color to white */
+    background-color: transparent;
+    border: 2px solid #3b82f6;
+}
+
+.btn-blue:hover {
+    transition: all 0.3s ease;
+    background: #0b63f3;
+    border: 2px solid #0b63f3;
+}
+
+.btn-blue-outline:hover {
+    color: white;
+    background-color: #3b82f6;
+}

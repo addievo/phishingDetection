@@ -35,7 +35,7 @@ def predict():
 
     # Print prediction
 
-    return render_template('result.html', prediction_text='The URL is {}'.format(prediction), url=url, features=x)
+    return render_template('result.html', prediction_text='{}'.format(prediction), url=url, features=x)
 
 
 if __name__ == '__main__':
