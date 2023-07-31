@@ -16,8 +16,8 @@ def get_analytics():
     combined_data = pd.read_csv("data/5.urldata.csv")
 
     # Prepare data
-
-    x = combined_data.drop(['Domain', 'Label'], axis=1)
+    combined_data = combined_data.drop("Web_Traffic", axis=1)  # drop 'Web_Traffic' first
+    x = combined_data.drop(['Domain', 'Label'], axis=1)  # then drop 'Domain' and 'Label'
     y = combined_data['Label']
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
