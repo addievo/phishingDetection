@@ -111,18 +111,14 @@ def prefixSuffix(url):
 # 12.Web traffic (Web_Traffic)
 def web_traffic(url):
     try:
-        # Filling the whitespaces in the URL if any
-        url = urllib.parse.quote(url)
-        rank = \
-        BeautifulSoup(urllib.request.urlopen("http://data.alexa.com/data?cli=10&dat=s&url=" + url).read(), "xml").find(
-            "REACH")['RANK']
-        rank = int(rank)
-    except TypeError:
-        return 1
-    if rank < 100000:
-        return 1
-    else:
-        return 0
+        rank_checker_response = requests.post("https://www.checkpagerank.net/index.php", {"name": url.domain})
+
+        global_rank = int(re.findall(r"Global Rank: ([0-9]+)", rank_checker_response.text)[0])
+        if global_rank > 0 and global_rank < 100000:
+            return 1
+        return -1
+    except:
+        return -1
 
 
 # domain age
@@ -138,8 +134,6 @@ def domainAge(domain_name):
         except:
             return 1
     if ((expiration_date is None) or (creation_date is None)):
-        return 1
-    elif ((type(expiration_date) is list) or (type(creation_date) is list)):
         return 1
     else:
         ageofdomain = abs((expiration_date - creation_date).days)
@@ -160,8 +154,6 @@ def domainExpiry(domain_name):
         except:
             return 1
     if (expiration_date is None):
-        return 1
-    elif (type(expiration_date) is list):
         return 1
     else:
         today = datetime.now()
@@ -239,14 +231,15 @@ def featureExtraction(url):
 
     # Domain based features (Checking DNS Record)
 
-    dns = 0
+    dns = 1
     try:
         domain_name = whois.whois(urlparse(url).netloc)
-    except:
-        dns = 1
+    except Exception as e:
+        print(f"Couldn't get whois for {url}, error: {e}")
+        dns = 0
 
     features.append(dns)
-    features.append(web_traffic(url))
+    #features.append(web_traffic(url))
     features.append(1 if dns == 1 else domainAge(domain_name))
     features.append(1 if dns == 1 else domainExpiry(domain_name))
 
