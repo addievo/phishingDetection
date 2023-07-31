@@ -4,10 +4,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 import joblib
+from sklearn.ensemble import RandomForestClassifier
 
 
 def load_data():
     combined_data = pd.read_csv("data/5.urldata.csv")
+
+    # Drop 'Web Traffic' column
+    combined_data = combined_data.drop('Web_Traffic', axis=1)
 
     # Split features and target y
 
@@ -33,7 +37,7 @@ def main():
 
     # Fit model to training data
 
-    model = MLPClassifier(alpha=0.001, hidden_layer_sizes=([100, 100, 100, 100, 100, 100]))
+    model = RandomForestClassifier(n_estimators=100, max_depth=2, random_state=0)
     model.fit(x_train, y_train)
 
     # predicting the target value from model for samples
