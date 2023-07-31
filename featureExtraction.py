@@ -264,13 +264,3 @@ def featureExtraction(url):
 
     return features
 
-
-# Convert features to dataframe
-
-def featureExtractionDF(url):
-    featureExtraction(url)
-    featureDF = ['Domain', 'Have_IP', 'Have_At', 'URL_Length', 'URL_Depth', 'Redirection',
-                 'https_Domain', 'TinyURL', 'Prefix/Suffix', 'DNS_Record', 'Web_Traffic',
-                 'Domain_Age', 'Domain_End', 'iFrame', 'Mouse_Over', 'Right_Click', 'Web_Forwards', 'Label']
-
-    return featureDF
