@@ -17,7 +17,10 @@
         <h1 class="h1">URL Check Result</h1>
         <p class="text-url">The URL is: <span class="{{ 'legit' if prediction_text == 'Legitimate' else 'phishing' }}">{{ prediction_text }}</span></p>
         <p class="url">URL: {{ url }}</p>
-        <p class="features">Features: {{ features }}</p>
+        <!-- Checks if Features is empty or not, if not then renders the features -->
+        {% if features %}
+            <p class="features">Features which triggered the website as Phishing : {{ features }}</p>
+        {% endif %}
         <a href="{{ url_for('home') }}" class="btn-blue-outline mx-1">Check another URL</a>
     </div>
     <script>

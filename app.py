@@ -33,10 +33,19 @@ def predict():
 
     prediction = 'Legitimate' if y_pred[0] == 0 else 'Phishing'
 
+    # Compute feature names that are set to 1
+    feature_names = ['having_IP_Address', 'having_At_Symbol', 'URL_Length', 'URL_Depth',
+                     'Redirection', 'https_In_Url', 'URL_Short', 'Prefix/Suffix', 'DNS_Record',
+                     'Domain_Age', 'Domain_Expiry', 'iFrame', 'Mouse_Over', 'Right_Click', 'Forwarding']
+
+    # Only compute suspicious features if the prediction is 'Phishing'
+    suspicious_features = []
+    if prediction == 'Phishing':
+        suspicious_features = [feature for feature, value in zip(feature_names, x[0]) if value == 1]
     # Print prediction
 
-    return render_template('result.html', prediction_text='{}'.format(prediction), url=url, features=x)
+    return render_template('result.html', prediction_text='{}'.format(prediction), url=url, features=suspicious_features)
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5202, debug=True)

@@ -63,11 +63,13 @@ body, html {
     background-color: #3b82f6;
 }
 .legit {
+    font-family: 'Courier Prime', monospace;
     color: #15de15;
     font-size: 2.5em;
 }
 
 .phishing {
+    font-family: 'Courier Prime', monospace;
     color: #670000;
     font-size: 2.5em;
 }
